@@ -38,7 +38,7 @@ setuptools.setup(
         long_description=long_description,
         ext_modules = ext_modules,
         license = 'GNU Affero General Public License v3 or later (AGPLv3+)',
-        url = 'https://github.com/electronsandstuff/MatProd'
+        url = 'https://github.com/electronsandstuff/MatProd',
         setup_requires = [
             'numpy',
             'wheel',
