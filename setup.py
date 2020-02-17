@@ -36,11 +36,14 @@ setuptools.setup(
         author_email = 'contact@chris-pierce.com',
         python_requires='>=3.1',
         long_description=long_description,
+        long_description_content_type="text/markdown",
         ext_modules = ext_modules,
         license = 'GNU Affero General Public License v3 or later (AGPLv3+)',
         url = 'https://github.com/electronsandstuff/MatProd',
-        setup_requires = [
+        install_requires = [
             'numpy',
+        ],
+        setup_requires = [
             'wheel',
         ],
         classifiers = [
