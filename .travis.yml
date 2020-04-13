@@ -10,6 +10,7 @@ before_install:
   - |
     if [[ "$TRAVIS_OS_NAME" = windows ]]; then
         choco install python --version 3.8.0
+        choco install choco install microsoft-visual-cpp-build-tools
         export PATH="/c/Python38:/c/Python38/Scripts:$PATH"
         ln -s /c/Python38/python.exe /c/Python38/python3.exe
     fi
@@ -24,6 +25,10 @@ stages:
 
 jobs:
   include:
+    - os: windows
+      language: shell
+      name: Test on Windows
+
     # Deploy source distribution
     - stage: deploy
       name: Deploy source distribution
@@ -70,5 +75,3 @@ env:
     - TWINE_USERNAME=__token__
     - CIBW_BEFORE_BUILD="pip install numpy"
     - CIBW_SKIP="cp27-* pp27-*"
-    - CIBW_TEST_COMMAND="python3 {project}/test.py"
-    - CIBW_TEST_REQUIRES="numpy"
