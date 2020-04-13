@@ -10,10 +10,11 @@ before_install:
   - |
     if [[ "$TRAVIS_OS_NAME" = windows ]]; then
         choco install python --version 3.8.0
-        choco install choco install microsoft-visual-cpp-build-tools
+        choco install microsoft-visual-cpp-build-tools
         export PATH="/c/Python38:/c/Python38/Scripts:$PATH"
         ln -s /c/Python38/python.exe /c/Python38/python3.exe
     fi
+  - pip install numpy
 
 script:
   - python3 setup.py install
