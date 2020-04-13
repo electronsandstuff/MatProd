@@ -1,3 +1,4 @@
+#! /usr/bin/env python3
 '''
 MatProd - Fast repeated multiplication of 2x2 matrices
 Copyright (C) 2020 Christopher M. Pierce (contact@chris-pierce.com)

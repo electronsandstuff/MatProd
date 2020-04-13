@@ -86,3 +86,12 @@ implementation!  The results are also identical to machine precision.
 
 ## Reporting Issues and Feature Requests
 Please file an issue on the projects github page [here](https://github.com/electronsandstuff/MatProd).
+
+## Building and Testing
+If you are modifying or contributing to the library please build through the
+python system using `./setup.py build`.  On Windows you will need to have
+Microsoft Visual Studio installed and on linux, please have gcc and the python
+3 header files.  Once built, test the library by running `./test.py`.  Please
+run this in a virtual environment where matprod is not already installed so
+gaurantee that you are testing the active project and not a previously
+installed version of the library.
