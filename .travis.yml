@@ -71,3 +71,4 @@ env:
     - CIBW_BEFORE_BUILD="pip install numpy"
     - CIBW_SKIP="cp27-* pp27-*"
     - CIBW_TEST_COMMAND="python3 {project}/test.py"
+    - CIBW_TEST_REQUIRES="numpy"
