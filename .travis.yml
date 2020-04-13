@@ -6,6 +6,14 @@ python:
   - 3.7
   - 3.8
 
+before_install:
+  - |
+    if [[ "$TRAVIS_OS_NAME" = windows ]]; then
+        choco install python --version 3.8.0
+        export PATH="/c/Python38:/c/Python38/Scripts:$PATH"
+        ln -s /c/Python38/python.exe /c/Python38/python3.exe
+    fi
+
 script:
   - python3 setup.py install
   - python3 test.py
