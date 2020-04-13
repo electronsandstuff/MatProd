@@ -1,5 +1,9 @@
 language: python
 
+os:
+  - linux
+  - osx
+
 python:
   - 3.5
   - 3.6
@@ -7,60 +11,17 @@ python:
   - 3.8
 
 install:
-  - python3 -m pip install pytest
+  - python3 -m pip install twine
 
 script:
+  - python3 setup.py build
   - python3 setup.py install
   - python3 test.py
+  - python3 setup.py sdist bdist_wheel
 
-stages:
-  - test
-  - deploy
-
-jobs:
-  include:
-    # Deploy source distribution
-    - stage: deploy
-      name: Deploy source distribution
-      install: skip
-      script: python3 setup.py sdist --formats=gztar
-      after_success: |
-        python3 -m pip install twine
-        python3 -m twine upload --skip-existing dist/*.tar.gz
-
-    # Deploy on linux
-    - stage: deploy
-      name: Build and deploy Linux wheels
-      services: docker
-      install: python3 -m pip install cibuildwheel==1.3.0
-      script: python3 -m cibuildwheel --output-dir wheelhouse
-      after_success: |
-        python3 -m pip install twine
-        python3 -m twine upload --skip-existing wheelhouse/*.whl
-
-    # Deploy on mac
-    - stage: deploy
-      name: Build and deploy macOS wheels
-      os: osx
-      language: shell
-      install: python3 -m pip install cibuildwheel==1.3.0
-      script: python3 -m cibuildwheel --output-dir wheelhouse
-      after_success: |
-        python3 -m pip install twine
-        python3 -m twine upload --skip-existing wheelhouse/*.whl
-
-    # Deploy on windows
-    - stage: deploy
-      name: Build and deploy Windows wheels
-      os: windows
-      language: shell
-      install: python3 -m pip install cibuildwheel==1.3.0
-      script: python3 -m cibuildwheel --output-dir wheelhouse
-      after_success: |
-        python3 -m pip install twine
-        python3 -m twine upload --skip-existing wheelhouse/*.whl
+after_success:
+  - python3 -m twine upload --skip-existing dist/*
 
 env:
   global:
     - TWINE_USERNAME=__token__
-    # Note: TWINE_PASSWORD is set to a PyPI API token in Travis settings
