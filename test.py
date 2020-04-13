@@ -27,10 +27,11 @@ import pathlib
 import unittest
 
 # Try to add the recently built package to our path
-build_dir = os.listdir('build')
-bin_paths = [pathlib.Path.cwd()/ 'build' / x for x in build_dir]
-for bin_path in bin_paths:
-    sys.path.append(str(bin_path.resolve()))
+if(os.path.isdir('build')):
+    build_dir = os.listdir('build')
+    bin_paths = [pathlib.Path.cwd()/ 'build' / x for x in build_dir]
+    for bin_path in bin_paths:
+        sys.path.append(str(bin_path.resolve()))
 
 # Now try to import matprod
 import matprod
