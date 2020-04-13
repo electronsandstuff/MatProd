@@ -6,22 +6,6 @@ python:
   - 3.7
   - 3.8
 
-before_install:
-  - |
-    if [[ "$TRAVIS_OS_NAME" = windows ]]; then
-        # Install python
-        choco install python --version 3.8.0
-
-        # Install the C++ compiler
-        choco install microsoft-visual-cpp-build-tools
-
-        # Add python to the path
-        export PATH="/c/Python38:/c/Python38/Scripts:$PATH"
-
-        # make sure it's on PATH as 'python3'
-        ln -s /c/Python38/python.exe /c/Python38/python3.exe
-    fi
-
 install:
   - python3 -m pip install pytest
 
@@ -35,11 +19,6 @@ stages:
 
 jobs:
   include:
-    # Optional: run a test on Windows
-    - os: windows
-      language: shell
-      name: Test on Windows
-
     # Deploy source distribution
     - stage: deploy
       name: Deploy source distribution
