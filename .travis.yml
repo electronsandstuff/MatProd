@@ -50,3 +50,4 @@ env:
   global:
     - TWINE_USERNAME=__token__
     - CIBW_BEFORE_BUILD="pip install numpy"
+    - CIBW_SKIP="cp27-*"
