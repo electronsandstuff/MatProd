@@ -1,6 +1,9 @@
 # MatProd
 Fast repeated multiplication of 2x2 matrices in a compiled numpy extension.
 
+[![Travis](https://travis-ci.com/electronsandstuff/MatProd.svg?branch=master)](https://travis-ci.com/electronsandstuff/MatProd)
+
+
 ## Why does this exist
 This extension is the solution to a performance problem with the repeated
 multiplication of 2x2 numpy matrices in python.  For some applications in
