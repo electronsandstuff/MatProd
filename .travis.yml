@@ -1,30 +1,34 @@
 language: python
 
-os:
-  - linux
-  - osx
-
-python:
-  - 3.5
-  - 3.6
-  - 3.7
-  - 3.8
+matrix:
+  include:
+    - sudo: required
+      services:
+        - docker
+      env: DOCKER_IMAGE=quay.io/pypa/manylinux1_x86_64
+           PLAT=manylinux1_x86_64
+    - sudo: required
+      services:
+        - docker
+      env: DOCKER_IMAGE=quay.io/pypa/manylinux1_i686
+           PRE_CMD=linux32
+           PLAT=manylinux1_i686
+    - sudo: required
+      services:
+        - docker
+      env: DOCKER_IMAGE=quay.io/pypa/manylinux2010_x86_64
+           PLAT=manylinux2010_x86_64
 
 install:
-  - python3 -m pip install twine
-  - python3 -m pip install cibuildwheel
+  - docker pull $DOCKER_IMAGE
 
 script:
-  - python3 setup.py build
-  - python3 setup.py install
-  - python3 test.py
-  - python3 setup.py sdist
-  - python3 -m cibuildwheel --output-dir dist
+  - docker run --rm -e PLAT=$PLAT -v `pwd`:/io $DOCKER_IMAGE $PRE_CMD /io/travis/build-wheels.sh
+  - ls wheelhouse/
 
 after_success:
-  - python3 -m twine upload --skip-existing dist/*
+  - python3 -m twine upload --skip-existing wheelhouse/*
 
 env:
   global:
     - TWINE_USERNAME=__token__
-    - CIBW_BEFORE_BUILD="python3 -m pip install numpy"
