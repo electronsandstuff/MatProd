@@ -12,12 +12,14 @@ python:
 
 install:
   - python3 -m pip install twine
+  - python3 -m pip install cibuildwheel==1.3.0
 
 script:
   - python3 setup.py build
   - python3 setup.py install
   - python3 test.py
-  - python3 setup.py sdist bdist_wheel
+  - python3 setup.py sdist
+  - python3 -m cibuildwheel --output-dir dist
 
 after_success:
   - python3 -m twine upload --skip-existing dist/*
