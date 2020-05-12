@@ -35,7 +35,7 @@ first element will be `ret[:,:,0] = Ms[:,:,0]`, the second and third will be
 Ms[:,:,0]`, and so on.
 
 Test the code out with this simple example:
-```
+```python
 import matprod
 
 # Create a set of matrices to multiply
@@ -51,7 +51,7 @@ print(matprod.cumlprod(Ms)[:,:,-1])
 ## Performance
 The time taken to multiply 10,000 2x2 matrices by a python implementation and
 this library can be compared with the following scripts.
-```
+```python
 import matprod
 import numpy as np
 import timeit
