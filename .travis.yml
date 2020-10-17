@@ -77,5 +77,5 @@ jobs:
 env:
   global:
     - TWINE_USERNAME=__token__
-    - CIBW_BEFORE_BUILD="pip install --upgrade certifi && pip install numpy"
+    - CIBW_BEFORE_BUILD="pip install --upgrade certifi && pip install numpy==1.18.5"
     - CIBW_SKIP="cp27-* pp27-*"
